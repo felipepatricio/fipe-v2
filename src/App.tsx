@@ -1,6 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import brand from './service/brand'
+import Brand from "./interfaces/brand";
+import {AxiosResponse} from "axios";
+
+const getBrand = () => {
+  return brand;
+}
 
 function App() {
   return (
