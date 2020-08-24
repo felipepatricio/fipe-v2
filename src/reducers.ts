@@ -5,27 +5,33 @@ export const vehicleReducer = useReducer<Reducer<any, any>>((state, action) => {
   switch (action.type) {
     case 'ADD_BRAND':
       return {
-        state
+        ...state,
+        brand: action.payload
       };
     case 'CHANGE_BRAND':
       return {
-        state
+        ...state,
+        brand: action.payload
       };
     case 'ADD_MODEL':
       return {
-        state
+        ...state,
+        model: action.payload
       };
     case 'CHANGE_MODEL':
       return {
-        state
+        ...state,
+        model: action.payload
       };
     case 'ADD_YEAR':
       return {
-        state
+        ...state,
+        year: action.payload
       };
     case 'CHANGE_YEAR':
       return {
-        state
+        ...state,
+        year: action.payload
       };
     default:
       return {};
