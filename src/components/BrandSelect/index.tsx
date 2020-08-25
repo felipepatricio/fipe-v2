@@ -17,8 +17,10 @@ const BrandSelect: React.FC = () => {
         return setBrands(response.data);
       });
   }, []);
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setBrand(event.target.value as string);
+  const handleChange = (
+    event: React.ChangeEvent<{ name?: string | undefined; value: unknown }>
+  ) => {
+    return setBrand(event.target.value as string);
   };
 
   return (
