@@ -5,31 +5,34 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 
 import { Brand } from '../../interfaces/brand';
-import { useVehicle } from '../../VehicleContext';
 
-const BrandSelect: React.FC = (): JSX.Element => {
-  const [brands, setBrands] = useState<Brand[]>([]);
-  const { state } = useVehicle();
+const BrandSelect: React.FC = () => {
+  const [years, setYears] = useState<Brand[]>([]);
+  const [year, setYear] = useState<string>('');
+
   useEffect(() => {
     axios
-      .get<Brand[]>('https://parallelum.com.br/fipe/api/v1/carros/marcas')
+      .get<Brand[]>(
+        'https://parallelum.com.br/fipe/api/v1/carros/marcas/59/modelos/5940/anos'
+      )
       .then((response) => {
-        return setBrands(response.data);
+        return setYears(response.data);
       });
   }, []);
 
   const handleChange = (
     event: React.ChangeEvent<{ name?: string | undefined; value: unknown }>
   ) => {
-    console.log(state);
+    console.log(event);
+    setYear(event.target.value as string);
   };
 
   return (
     <>
-      <InputLabel id="brandSelect">Marca</InputLabel>
-      <Select labelId="brandSelect" onChange={handleChange}>
-        {brands.map(({ nome, codigo }) => (
-          <MenuItem key={codigo} value={nome}>
+      <InputLabel id="yearSelect">Ano</InputLabel>
+      <Select labelId="yearSelect" value={year} onChange={handleChange}>
+        {years.map(({ nome, codigo }) => (
+          <MenuItem key={codigo} value={codigo}>
             {nome}
           </MenuItem>
         ))}

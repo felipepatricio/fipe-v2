@@ -43,10 +43,3 @@ it('Should render email input', () => {
 
   expect(inputEmail).not.toBeNull();
 });
-
-it('Should render a consultation price button', () => {
-  const { getByLabelText } = render(<App />);
-  const buttonConsultationPrice = getByLabelText('Consultar preço');
-
-  expect(buttonConsultationPrice).not.toBeNull();
-});

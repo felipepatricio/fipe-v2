@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import axios from 'axios';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
@@ -36,4 +36,4 @@ const ModelSelect: React.FC = () => {
   );
 };
 
-export default ModelSelect;
+export default memo(ModelSelect);
