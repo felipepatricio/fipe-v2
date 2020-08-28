@@ -1,39 +1,201 @@
-import { Reducer, useReducer } from 'react';
-import { initialState } from './VehicleContext';
+import { Brand } from './interfaces/brand';
+import { Model } from './interfaces/model';
+import { Year } from './interfaces/year';
+import { Version } from './interfaces/version';
+import { Reducer } from 'react';
 
-export const vehicleReducer = useReducer<Reducer<any, any>>((state, action) => {
+enum ActionVehicleType {
+  AddBrand = 'ADD_BRAND',
+  ChangeBrand = 'CHANGE_BRAND',
+  AddModel = 'ADD_MODEL',
+  ChangeModel = 'CHANGE_MODEL',
+  AddYear = 'ADD_YEAR',
+  ChangeYear = 'CHANGE_YEAR',
+  AddVersion = 'ADD_VERSION',
+  ChangeVersion = 'CHANGE_VERSION'
+}
+
+export interface IAction {
+  type: ActionVehicleType;
+  payload: {
+    codigo: string;
+    nome: string;
+  };
+}
+
+export interface IState {
+  brand: Brand;
+  model: Model;
+  year: Year;
+  version: Version;
+  value: string;
+}
+
+const vehicleReducer: Reducer<IState, IAction> = (state, action): IState => {
   switch (action.type) {
-    case 'ADD_BRAND':
+    case ActionVehicleType.AddBrand:
       return {
-        ...state,
-        brand: action.payload
+        brand: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        model: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        year: {
+          codigo: state.year.codigo,
+          nome: state.year.nome
+        },
+        version: {
+          codigo: state.version.codigo,
+          nome: state.version.codigo
+        },
+        value: state.value
       };
-    case 'CHANGE_BRAND':
+    case ActionVehicleType.ChangeBrand:
       return {
-        ...state,
-        brand: action.payload
+        brand: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        model: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        year: {
+          codigo: state.year.codigo,
+          nome: state.year.nome
+        },
+        version: {
+          codigo: state.version.codigo,
+          nome: state.version.codigo
+        },
+        value: state.value
       };
-    case 'ADD_MODEL':
+    case ActionVehicleType.AddModel:
       return {
-        ...state,
-        model: action.payload
+        brand: {
+          codigo: state.brand.codigo,
+          nome: state.brand.nome
+        },
+        model: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        year: {
+          codigo: state.year.codigo,
+          nome: state.year.nome
+        },
+        version: {
+          codigo: state.version.codigo,
+          nome: state.version.codigo
+        },
+        value: state.value
       };
-    case 'CHANGE_MODEL':
+    case ActionVehicleType.ChangeModel:
       return {
-        ...state,
-        model: action.payload
+        brand: {
+          codigo: state.brand.codigo,
+          nome: state.brand.nome
+        },
+        model: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        year: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        version: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        value: state.value
       };
-    case 'ADD_YEAR':
+    case ActionVehicleType.AddYear:
       return {
-        ...state,
-        year: action.payload
+        brand: {
+          codigo: state.brand.codigo,
+          nome: state.brand.nome
+        },
+        model: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        year: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        version: {
+          codigo: state.version.codigo,
+          nome: state.version.nome
+        },
+        value: state.value
       };
-    case 'CHANGE_YEAR':
+    case ActionVehicleType.ChangeYear:
       return {
-        ...state,
-        year: action.payload
+        brand: {
+          codigo: state.brand.codigo,
+          nome: state.brand.nome
+        },
+        model: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        year: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        version: {
+          codigo: state.version.codigo,
+          nome: state.version.codigo
+        },
+        value: state.value
+      };
+    case ActionVehicleType.AddVersion:
+      return {
+        brand: {
+          codigo: state.brand.codigo,
+          nome: state.brand.nome
+        },
+        model: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        year: {
+          codigo: state.year.codigo,
+          nome: state.year.nome
+        },
+        version: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        value: state.value
+      };
+    case ActionVehicleType.ChangeVersion:
+      return {
+        brand: {
+          codigo: state.brand.codigo,
+          nome: state.brand.nome
+        },
+        model: {
+          codigo: state.model.codigo,
+          nome: state.model.nome
+        },
+        year: {
+          codigo: state.year.codigo,
+          nome: state.year.nome
+        },
+        version: {
+          codigo: action.payload.codigo,
+          nome: action.payload.nome
+        },
+        value: state.value
       };
     default:
-      return {};
+      return state;
   }
-}, initialState);
+};
+
+export default vehicleReducer;
